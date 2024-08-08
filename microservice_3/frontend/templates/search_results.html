@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <div id="results">
+        {% if articles %}
+            <ul>
+                {% for article in articles %}
+                    <li>
+                        Name: {{ article.name }}, Year: {{ article.year }}, Author: {{ article.author }}
+                        <button hx-post="/select_article" 
+                                hx-vals='{"article_id": "{{ article.id}}"}' 
+                                hx-target="body">
+                            Select
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% elif error %}
+            <div>{{ error }}</div>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
+    <div id="order-form">
+    </div>
+    <br>
+    <button hx-get="/search_article_get" hx-target="body">Back to Search</button>
+</body>
+</html>

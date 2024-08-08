@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+    <div id="confirmation-message">
+        <p>{{ message }}</p>
+    </div>
+    <br>
+    <button hx-get="/search_article_get" hx-target="body">Back to Search</button>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Article</title>
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+</head>
+<body>
+    <h1>Order Article</h1>
+    <div id="order-form">
+        {% if article %}
+            <h2>{{ article.name }}</h2>
+            <p>Year: {{ article.year }}</p>
+            <p>Author: {{ article.author }}</p>
+            <p>Price: ${{ article.price }}</p>
+            
+            <form hx-post="/place_order" hx-target="body">
+                <input type="hidden" name="article_id" value="{{ article.id }}">
+                <label for="user_id">User ID:</label>
+                <input type="text" id="user_id" name="user_id" required><br>
+                <button type="submit">Place Order</button>
+            </form>
+        {% else %}
+            <p>No article selected.</p>
+        {% endif %}
+    </div>
+    <div id="order-confirmation">
+    </div>
+    <br>
+    <button hx-get="/search_article_get" hx-target="body">Back to Search</button>
+</body>
+</html>
